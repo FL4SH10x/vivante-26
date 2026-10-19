@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CULTURALS | VIVANTE 2026</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body class="tva-archive-body">
+
+    <div class="bg-grid-lines"></div>
+
+    <div id="cursor-main"></div>
+    <div id="cursor-ghost"></div>
+
+    <header class="archive-header">
+        <a href="#" onclick="returnToNexus(event)" class="back-btn">
+            [ BACK TO NEXUS ]
+        </a>
+
+        <script>
+            function returnToNexus(e) {
+                e.preventDefault();
+                
+                // 1. Try to close the current tab (Works because target="_blank" opened it)
+                window.close();
+                
+                // 2. Fallback: If the user opened the link directly and the browser blocks window.close(),
+                // this safely routes them back to the main index page instead.
+                setTimeout(() => {
+                    window.location.href = '../index.html#events'; 
+                }, 200);
+            }
+        </script>
+        <div class="file-id" style="text-align: right;">
+            <h1>TIMELINE-616: COMPETETIVE CULTURALS</h1>
+            <p>/// STATUS: ACTIVE BRANCH ///</p>
+        </div>
+    </header>
+
+    <main class="archive-grid">
+
+        <div class="data-card">
+            <div class="card-visual">
+                <img src="../images/VOCALVERSE.png" alt="Vocalverse">
+                <div class="photo-scan-line"></div>
+            </div>
+            <div class="card-intel">
+                <h3>VOCALVERSE</h3>
+                <div class="meta-row">
+                    <span><i class="fas fa-calendar-alt"></i> OCT 24, 5:30 PM</span>
+                    <span class="threat-badge lvl-high">THREAT: HIGH</span>
+                </div>
+                <p class="desc">
+                    Assemble your squad. The ultimate vocal showdown across the Heroverse. Amp up your amps and shatter the multiverse with your sound.
+                </p>
+                <button class="register-btn" 
+                data-title="VOCALVERSE" 
+                data-team="Solo or Team (2-6 Members)"  
+                data-rules="Solo: 3 + 1 minutes (performance + entry/exit)|Group: 5 + 2 minutes (performance + entry/exit)|Any song, language, or genre is welcome!|Instruments, props, and backing tracks are allowed.|Stick to the time limits and keep your content appropriate for a college audience."
+                data-fee="FREE"
+                data-link="https://forms.gle/2W9JTuH4Bn9B91Ed9">
+                INITIATE PROTOCOL
+                </button>
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="card-visual">
+                <img src="../images/power moves.png" alt="Dance Off">
+                <div class="photo-scan-line"></div>
+            </div>
+            <div class="card-intel">
+                <h3>POWER MOVES</h3>
+                <div class="meta-row">
+                    <span><i class="fas fa-calendar-alt"></i> OCT 25, 5:30 PM</span>
+                    <span class="threat-badge lvl-omega">THREAT: OMEGA</span>
+                </div>
+                <p class="desc">
+                    Bring fire to floor as a standalone performer or if part of a group Coordinate your movements to stabilize the timeline. Group dance competition featuring styles from across the galaxy.
+                </p>
+                <button class="register-btn" 
+                data-title="POWER MOVES" 
+                data-team="Solo or Group(Max-6 Members)"  
+                data-rules="Solo: 3 + 1 minutes (performance + entry/exit)|Group: 5 + 2 minutes (performance + entry/exit)|Any dance style, song, or genre is welcome!|Props and accessories are allowed.|Bring your own music track, ready to go."
+                data-fee="FREE"
+                data-link="https://forms.gle/acjgMaVppLy2th3m6">
+                INITIATE PROTOCOL
+                </button>
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="card-visual">
+                <img src="../images/gallery (3).jpg" alt="Cosplay">
+                <div class="photo-scan-line"></div>
+            </div>
+            <div class="card-intel">
+                <h3>HEROIC ATTIRE (COSPLAY)</h3>
+                <div class="meta-row">
+                    <span><i class="fas fa-calendar-alt"></i> FEB 21, 6:00 PM</span>
+                    <span class="threat-badge lvl-med">THREAT: MED</span>
+                </div>
+                <p class="desc">
+                    Blend in or stand out. Showcase your best armor, capes, and tech in the ultimate Heroverse fashion walk.
+                </p>
+                <a href="#" class="register-btn">INITIATE PROTOCOL</a>
+            </div>
+        </div>
+
+    </main>
+    <div id="holo-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-scanline"></div>
+            
+            <div class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            
+            <div class="modal-header">
+                <h2 id="modal-title">EVENT PROTOCOL</h2>
+                <p class="modal-status">/// CLEARANCE GRANTED ///</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-info-row">
+                    <span class="info-label">SQUAD SIZE:</span>
+                    <span id="modal-team" class="info-val">...</span>
+                </div>
+                <div class="modal-info-row">
+                    <span class="info-label">CREDITS REQ:</span>
+                    <span id="modal-fee" class="info-val">...</span>
+                </div>
+                
+                <div class="modal-rules">
+                    <strong>ROEs (Rules of Engagement):</strong>
+                    <ul id="modal-rules-list">
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <a href="#" id="modal-link" class="confirm-btn" target="_blank">
+                [ REGISTER SQUAD ]
+            </a>
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

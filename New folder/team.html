@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>S.H.I.E.L.D. ROSTER | VIVANTE 2026</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <style>
+        /* === 1. NAVBAR OVERRIDES (Hides extra links for popup mode) === */
+        .nav-left, .nav-right, #mobile-menu-overlay, .hamburger { 
+            display: none !important; 
+        }
+        .navbar { justify-content: center !important; }
+
+        /* === 2. COMPACT S.H.I.E.L.D. PERSONNEL ROSTER === */
+        .roster-section {
+            max-width: 1100px;
+            margin: 80px auto 0;
+            padding: 0 20px;
+        }
+        .roster-category {
+            margin-bottom: 70px;
+        }
+        .category-title {
+            font-family: 'Courier New', monospace;
+            color: #ff0050;
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 4px;
+            border-bottom: 1px solid rgba(255, 0, 80, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
+        }
+        /* Centers the 3D Wing Leader Card above the team grid */
+        .wing-leader-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 35px;
+        }
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+        }
+        .mini-badge {
+            background: rgba(0, 15, 25, 0.6);
+            border-left: 3px solid #00f0ff;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.05);
+        }
+        .mini-badge::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            transition: 0.4s;
+        }
+        .mini-badge:hover {
+            background: rgba(0, 25, 45, 0.9);
+            border-left-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            transform: translateX(5px);
+        }
+        .mini-badge:hover::before {
+            left: 150%;
+        }
+        .badge-name {
+            font-family: 'Play', sans-serif;
+            font-weight: 900;
+            color: #fff;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .badge-role {
+            font-family: 'Courier New', monospace;
+            color: #00f0ff;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-main"></div>
+    <div id="cursor-ghost"></div>
+
+    <div class="navbar-bg"></div>
+    <nav class="navbar">
+        <div class="logo nav-logo reveal" style="opacity: 1; pointer-events: auto;" onclick="window.close();" title="CLOSE DATABASE">
+            <img src="images/logo.png" alt="Logo" style="height: 105px; cursor: pointer;" />
+        </div>
+    </nav>
+
+    <main id="main-content" style="padding-top: 150px; min-height: 100vh; padding-bottom: 50px;">
+        <section id="team" class="section">
+            <h2 class="section-title">CLASSIFIED ASSETS</h2>
+            
+            <div style="text-align: center; color: #8ab4f8; font-family: 'Courier New', monospace; max-width: 800px; margin: -20px auto 50px; font-size: 0.9rem; letter-spacing: 1px;">
+                > ACCESSING LEVEL 8 S.H.I.E.L.D. DATABASE... <br>
+                > DISPLAYING CORE INITIATIVE OPERATIVES & WING COMMANDERS.
+            </div>
+
+            <!-- LEVEL 1: OVERALL FESTIVAL LEADERSHIP (2 Coordinators) -->
+            <div class="shield-grid" style="margin-bottom: 80px;">
+                
+                <!-- Coordinator Card 1 -->
+                <div class="agent-card" onclick="flipCard(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="agent-status">STATUS: ACTIVE</div>
+                            <div class="agent-photo">
+                                <img src="images/zai.jpeg" alt="JAI" onerror="this.style.display='none'; this.parentNode.innerHTML='[ IMAGE NOT FOUND ]'">
+                                <div class="photo-scan-line"></div>
+                            </div>
+                            <div class="agent-info">
+                                <h3 class="agent-name">JAI</h3>
+                                <p class="agent-role">ID: COORDINATOR</p>
+                                <div class="agent-stats">
+                                    <div class="stat-row">
+                                        <span>LEADERSHIP</span>
+                                        <div class="bar"><div class="fill" style="width: 95%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>STRESS</span>
+                                        <div class="bar"><div class="fill" style="width: 40%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="barcode-container">
+                                <div class="barcode-lines">|| █ || █ █ ||| █ || █</div>
+                                <div class="barcode-quote">"I build the path."</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="classified-stamp">TOP SECRET</div>
+                            <div class="terminal-loader">ACCESSING BIOMETRICS...<br>DECRYPTING FILE...</div>
+                            <div class="secret-data">
+                                <p class="typewriter" data-text="SUBJECT: THE ARCHITECT. Known for manipulating reality. WEAKNESS: Coffee shortage. THREAT LEVEL: OMEGA."></p>
+                            </div>
+                            <div class="return-btn">CLICK TO CLOSE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coordinator Card 2 -->
+                <div class="agent-card" onclick="flipCard(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="agent-status">STATUS: ACTIVE</div>
+                            <div class="agent-photo">
+                                <img src="images/sagnik.jpeg" alt="SAGNIK B." onerror="this.style.display='none';">
+                                <div class="photo-scan-line"></div>
+                            </div>
+                            <div class="agent-info">
+                                <h3 class="agent-name">SAGNIK B.</h3>
+                                <p class="agent-role">ID: CO-COORDINATOR</p>
+                                <div class="agent-stats">
+                                    <div class="stat-row">
+                                        <span>MGMT</span>
+                                        <div class="bar"><div class="fill" style="width: 90%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>CHAOS</span>
+                                        <div class="bar"><div class="fill" style="width: 20%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="barcode-container">
+                                <div class="barcode-lines">| █ || █ ||| █ █ || █</div>
+                                <div class="barcode-quote">"Chaos is a ladder."</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="classified-stamp">RESTRICTED</div>
+                            <div class="terminal-loader">VERIFYING CLEARANCE...<br>ACCESS GRANTED.</div>
+                            <div class="secret-data">
+                                <p class="typewriter" data-text="SUBJECT: THE MANAGER. Capability: Order from Chaos. WARNING: Do not disturb during schedule planning."></p>
+                            </div>
+                            <div class="return-btn">CLICK TO CLOSE</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- LEVEL 2: DEPARTMENT WINGS -->
+            <div class="roster-section">
+                
+                <!-- WING: EVENT MANAGEMENT (2 Heads) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// EVENT MANAGEMENT ///</h3>
+                    
+                    <div class="wing-leader-wrap" style="gap: 40px; flex-wrap: wrap;">
+                        <!-- Event Head 1 -->
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: ACTIVE</div>
+                                    <div class="agent-photo">
+                                        <img src="images/boomi.jpeg" alt="BHOOMI S." onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">BHOOMI S.</h3>
+                                        <p class="agent-role">ID: EVENT LEAD</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>EXECUTION</span>
+                                                <div class="bar"><div class="fill" style="width: 95%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">|| █ █ || █ ||| █ || █</div>
+                                        <div class="barcode-quote">"The show must go on."</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">ON STAGE</div>
+                                    <div class="terminal-loader">LOADING SCRIPTS...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE DIRECTOR. Orchestrates timelines and multiverse events."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">AKSHAT A. SINGH</span><span class="badge-role">EVENT TEAM</span></div>
+                    
+                        <div class="mini-badge"><span class="badge-name">C. GOUTHAM</span><span class="badge-role">EVENT TEAM</span></div>
+                    
+                        <div class="mini-badge"><span class="badge-name">LORD YASSU</span><span class="badge-role">EVENT TEAM</span></div>
+                    </div>
+                </div>
+
+                <!-- WING: DESIGN (1 Head) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// DESIGN ///</h3>
+                    
+                    <div class="wing-leader-wrap">
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: DEPLOYED</div>
+                                    <div class="agent-photo">
+                                        <img src="images/angel.jpeg" alt="ANGEL" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">ANGEL</h3>
+                                        <p class="agent-role">ID: LEAD DESIGNER</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>AESTHETICS</span>
+                                                <div class="bar"><div class="fill" style="width: 100%"></div></div>
+                                            </div>
+                                            <div class="stat-row">
+                                                <span>RENDER TIME</span>
+                                                <div class="bar"><div class="fill" style="width: 25%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">█ || █ █ ||| █ ||| █</div>
+                                        <div class="barcode-quote">"Friendly Neighbourhood Designer"</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">CYBER HAZARD</div>
+                                    <div class="terminal-loader">COOKING SOMETHING ARTISTIC...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: ARTSY-SPIDER. Ability: Speaking in ARTISTRY. SLEEP CYCLE: EVER-existent. Approach with caffeine."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: DEPLOYED</div>
+                                    <div class="agent-photo">
+                                        <img src="images/swastika.jpeg" alt="SWASTIKA" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">SWASTIKA</h3>
+                                        <p class="agent-role">ID: LEAD DESIGNER</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>AESTHETICS</span>
+                                                <div class="bar"><div class="fill" style="width: 100%"></div></div>
+                                            </div>
+                                            <div class="stat-row">
+                                                <span>RENDER TIME</span>
+                                                <div class="bar"><div class="fill" style="width: 55%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">█ || █ █ ||| █ ||| █</div>
+                                        <div class="barcode-quote">"CHOTA DON IS HERE TO SAVE THE NIGHT"</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">CYBER HAZARD</div>
+                                    <div class="terminal-loader">COOKING SOMETHING ARTISTIC...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: CHOTA DON SAMBHAL LEGA"></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">SIYA</span><span class="badge-role">DESIGNER</span></div>
+                        <div class="mini-badge"><span class="badge-name">MAHIP</span><span class="badge-role">3D ARTIST</span></div>
+                        <div class="mini-badge"><span class="badge-name">FLASH</span><span class="badge-role">UI/UX SPECIALIST</span></div>
+                        <div class="mini-badge"><span class="badge-name">SUBASH</span><span class="badge-role">THUMBNAIL DESIGNER</span></div>
+                    </div>
+                </div>
+
+                <!-- WING: SOCIAL MEDIA (1 Head) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// SOCIAL MEDIA ///</h3>
+                    
+                    <div class="wing-leader-wrap">
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: ACTIVE</div>
+                                    <div class="agent-photo">
+                                        <img src="images/subash.jpeg" alt="SUBASH" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">SUBASH M.</h3>
+                                        <p class="agent-role">ID: MEDIA LEAD</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>ENGAGEMENT</span>
+                                                <div class="bar"><div class="fill" style="width: 98%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">|| █ █ || █ ||| █ || █</div>
+                                        <div class="barcode-quote">"Controlling the narrative."</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">VIRAL THREAT</div>
+                                    <div class="terminal-loader">UPLOADING TO NEXUS...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE INFLUENCER. Master of the algorithm and digital broadcasting."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">JAI</span><span class="badge-role">CHOTA ARTIST</span></div>
+                    </div>
+                </div>
+
+                <!-- WING: DECOR (No Head specified, uses Mini-Badges) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// DECOR ///</h3>
+                    
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">SUNAYANA</span><span class="badge-role">DECOR TEAM</span></div>
+                        <div class="mini-badge"><span class="badge-name">NANDANA</span><span class="badge-role">DECOR TEAM</span></div>
+                        <div class="mini-badge"><span class="badge-name">RAJEEV AND FRIENDS</span><span class="badge-role">DECOR TEAM</span></div>
+                    </div>
+                </div>
+
+                <!-- WING: LOGISTICS (2 Heads) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// LOGISTICS ///</h3>
+                    
+                    <div class="wing-leader-wrap" style="gap: 40px; flex-wrap: wrap;">
+                        <!-- Logistics Head 1 -->
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: ACTIVE</div>
+                                    <div class="agent-photo">
+                                        <img src="images/amru.jpeg" alt="AMRATASH" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">AMRATASH</h3>
+                                        <p class="agent-role">ID: LOGISTICS LEAD</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>SUPPLY RUN/SLEEPY RUN</span>
+                                                <div class="bar"><div class="fill" style="width: 95%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">█ || █ || █ █ ||| █ ||</div>
+                                        <div class="barcode-quote">"Moving mountains.(while asleep)"</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">TOP SECRET</div>
+                                    <div class="terminal-loader">TRACKING RESOURCES...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE GEARSMITH. Mastermind behind ground operations and resource allocation."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Logistics Head 2 -->
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: ACTIVE</div>
+                                    <div class="agent-photo">
+                                        <img src="images/nitin.jpeg" alt="TINTIN" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">TINTIN</h3>
+                                        <p class="agent-role">ID: LOGISTICS LEAD</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>ENDURANCE</span>
+                                                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">|| █ || █ █ ||| █ || █</div>
+                                        <div class="barcode-quote">"No delays permitted.(Bye-Bye)"</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">TOP SECRET</div>
+                                    <div class="terminal-loader">MAPPING ROUTES...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE TRANSPORTER. Ensures every asset is precisely where it needs to be."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">YASH K.G.</span><span class="badge-role">HOSPITALITY</span></div>
+                        <div class="mini-badge"><span class="badge-name">LAKSHYARAJ</span><span class="badge-role">CROWD CONTROL</span></div>
+                    </div>
+                </div>
+
+                <!-- WING: SPONSORSHIP (2 Heads) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// SPONSORSHIP ///</h3>
+                    
+                    <div class="wing-leader-wrap" style="gap: 40px; flex-wrap: wrap;">
+                        <!-- Sponsor Head 1 -->
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: ACTIVE</div>
+                                    <div class="agent-photo">
+                                        <img src="images/zai.jpeg" alt="SPONSOR HEAD 1" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">JAI</h3>
+                                        <p class="agent-role">ID: SPONSOR LEAD</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>NEGOTIATION</span>
+                                                <div class="bar"><div class="fill" style="width: 98%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">|| █ █ || █ ||| █ || █</div>
+                                        <div class="barcode-quote">"Funded by Stark Ind."</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">SECURE VAULT</div>
+                                    <div class="terminal-loader">SECURING ALLIANCES...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE NEGOTIATOR. Capable of charming a Frost Giant into a corporate sponsorship deal."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sponsor Head 2 -->
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: DEPLOYED</div>
+                                    <div class="agent-photo">
+                                        <img src="images/guno.jpeg" alt="SPONSOR HEAD 2" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">SAGNIK B.</h3>
+                                        <p class="agent-role">ID: SPONSOR LEAD</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>NETWORKING</span>
+                                                <div class="bar"><div class="fill" style="width: 100%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">|| █ || █ █ || █ ||| █</div>
+                                        <div class="barcode-quote">"Securing the multiverse."</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">RESTRICTED</div>
+                                    <div class="terminal-loader">PITCHING DECK...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE BROKER. Fluent in corporate treaties across timelines. Never takes no for an answer."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">SATHYAM</span><span class="badge-role">SPONSORSHIP TEAM</span></div>
+                        <div class="mini-badge"><span class="badge-name">KISLAY</span><span class="badge-role">SPONSORSHIP TEAM</span></div>
+                    </div>
+                </div>
+
+                <!-- WING: TECH AND DEVELOPMENT (1 Head) -->
+                <div class="roster-category">
+                    <h3 class="category-title">/// TECH & DEVELOPMENT ///</h3>
+                    
+                    <div class="wing-leader-wrap">
+                        <div class="agent-card" onclick="flipCard(this)">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <div class="agent-status">STATUS: ACTIVE</div>
+                                    <div class="agent-photo">
+                                        <img src="images/flash.jpeg" alt="FLASH" onerror="this.style.display='none';">
+                                        <div class="photo-scan-line"></div>
+                                    </div>
+                                    <div class="agent-info">
+                                        <h3 class="agent-name">FLASH</h3>
+                                        <p class="agent-role">ID: SYSTEM ARCHITECT</p>
+                                        <div class="agent-stats">
+                                            <div class="stat-row">
+                                                <span>ARCHITECTURE</span>
+                                                <div class="bar"><div class="fill" style="width: 100%"></div></div>
+                                            </div>
+                                            <div class="stat-row">
+                                                <span>RELATIVITY</span>
+                                                <div class="bar"><div class="fill" style="width: 90%"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="barcode-container">
+                                        <div class="barcode-lines">|| █ || █ █ || █ ||| █</div>
+                                        <div class="barcode-quote">"Structuring the multiverse."</div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="classified-stamp">OMEGA CLEARANCE</div>
+                                    <div class="terminal-loader">INITIALIZING SIMULATION...</div>
+                                    <div class="secret-data">
+                                        <p class="typewriter" data-text="SUBJECT: THE NEXUS ARCHITECT. Proficient in simulating complex frameworks and high-level system automation. THREAT LEVEL: OMEGA."></p>
+                                    </div>
+                                    <div class="return-btn">CLICK TO CLOSE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roster-grid">
+                        <div class="mini-badge"><span class="badge-name">GEMINI</span><span class="badge-role">CO-DEVELOPER</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <div id="card-backdrop"></div>
+
+    <div id="arc-reactor-btn" onclick="handleArcClick()">
+        <div class="arc-light-source"></div>
+        <div id="arc-rotator" class="arc-rotator">
+            <svg class="arc-grille" viewBox="0 0 100 100">
+                <defs><filter id="grille-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.9"/></filter></defs>
+                <polygon class="inner-glow-triangle" points="9.3,26.5 90.7,26.5 50,97" fill="rgba(255, 255, 255, 0.05)" />
+                <g stroke="#1a1a1a" stroke-linejoin="round" stroke-linecap="round" filter="url(#grille-shadow)" fill="none">
+                    <polygon points="9.3,26.5 90.7,26.5 50,97" stroke-width="5" />
+                    <polygon points="29.7,38.3 70.3,38.3 50,73.5" stroke-width="4" />
+                    <g stroke-width="3.5">
+                        <g><line x1="50" y1="73.5" x2="50" y2="97" /><line x1="38" y1="26.5" x2="24" y2="5" /><line x1="62" y1="26.5" x2="76" y2="5" /></g>
+                        <g transform="rotate(120 50 50)"><line x1="50" y1="73.5" x2="50" y2="97" /><line x1="38" y1="26.5" x2="24" y2="5" /><line x1="62" y1="26.5" x2="76" y2="5" /></g>
+                        <g transform="rotate(240 50 50)"><line x1="50" y1="73.5" x2="50" y2="97" /><line x1="38" y1="26.5" x2="24" y2="5" /><line x1="62" y1="26.5" x2="76" y2="5" /></g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <div id="arc-radial-menu">
+        <div class="radial-bg">
+            <div class="tech-line line-1"></div>
+            <div class="tech-line line-2"></div>
+            <div class="tech-line line-3"></div>
+            <div class="tech-line line-4"></div>
+        </div>
+        <a href="#" onclick="window.close();" class="radial-link item-1"><span class="link-dot"></span> HOME BASE</a>
+        <a href="schedule.html" target="_blank" class="radial-link item-2"><span class="link-dot"></span> SCHEDULE</a>
+        <a href="shop.html" target="_blank" class="radial-link item-3"><span class="link-dot"></span> SUPPLIES</a>
+        <a href="javascript:void(0);" class="radial-link item-4"><span class="link-dot"></span> S.H.I.E.L.D</a>
+        <a href="sponsors.html" target="_blank" class="radial-link item-5"><span class="link-dot"></span> ALLIANCES</a>
+    </div>
+
+    <footer id="system-footer">
+        <div class="footer-ticker-wrap">
+            <div class="footer-ticker-move">
+                <span class="footer-ticker-item">// ALLIANCES SECURED //</span>
+                <span class="footer-ticker-item">// INITIATIVE FULLY FUNDED //</span>
+                <span class="footer-ticker-item">// ALLIANCES SECURED //</span>
+                <span class="footer-ticker-item">// INITIATIVE FULLY FUNDED //</span>
+                <span class="footer-ticker-item">// ALLIANCES SECURED //</span>
+                <span class="footer-ticker-item">// INITIATIVE FULLY FUNDED //</span>
+            </div>
+            <div class="footer-ticker-move">
+                <span class="footer-ticker-item">// ALLIANCES SECURED //</span>
+                <span class="footer-ticker-item">// INITIATIVE FULLY FUNDED //</span>
+                <span class="footer-ticker-item">// ALLIANCES SECURED //</span>
+                <span class="footer-ticker-item">// INITIATIVE FULLY FUNDED //</span>
+                <span class="footer-ticker-item">// ALLIANCES SECURED //</span>
+                <span class="footer-ticker-item">// INITIATIVE FULLY FUNDED //</span>
+            </div>
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-col lore-block">
+                <div class="lore-accent-line"></div>
+                <div class="lore-content">
+                    <div class="lore-header">/// DECRYPTED FILE ///</div>
+                    <p class="lore-text">
+                        <span class="highlight">INITIATIVE: VIVANTE '26</span><br>
+                        <span class="highlight">DIRECTIVE: INTO THE HEROVERSE</span><br>
+                        Gathering elite minds across the multiverse for a 3-day convergence of technology, culture, and power.
+                    </p>
+                    <div class="lore-footer">[ CLEARANCE: LEVEL 7 ]</div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-title">MISSION CONTROL</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="window.close();">HOME BASE</a></li>
+                    <li><a href="schedule.html" target="_blank">TIMELINE</a></li>
+                    <li><a href="sponsors.html" target="_blank">ALLIANCES</a></li>
+                    <li><a href="shop.html" target="_blank">SUPPLIES</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-title">FREQUENCIES</h3>
+                <div class="social-holo-grid">
+                    <a href="#" class="holo-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="holo-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="holo-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="holo-icon"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="comm-text">vivante@sac.iisertirupati.ac.in</div>
+            </div>
+        </div>
+
+        <div class="breathing-divider"></div>
+
+        <div class="system-bottom-bar">
+            <div class="copyright-text">© VIVANTE 2026 // ALL RIGHTS RESERVED</div>
+            <div class="reboot-container" onclick="window.close();">
+                <div class="power-btn"><i class="fas fa-power-off"></i></div>
+                <span>RETURN TO NEXUS</span>
+            </div>
+            <div class="dev-credits">
+                DESIGNED & DEVELOPED BY <span class="highlight">FLASH</span>
+            </div>
+        </div>
+    </footer> 
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VIVANTE 2026</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js" defer></script>
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <video id="intro-video" playsinline>
+            <source src="videos/Vivanteintro.mp4" type="video/mp4">
+        </video>
+        <div id="quote-terminal">
+            <div class="quote-text" id="quote-display">ESTABLISHING CONNECTION...</div>
+        </div>
+        <div class="sys-hud top-left">SYS.VER: 20.26.0</div>
+        <div class="sys-hud top-right">NEXUS STATUS: STABLE</div>
+        <div class="sys-hud bottom-right">SEC: ALPHA-1</div>
+        <button id="start-btn" class="stark-btn">
+            <span class="btn-text">INITIALIZE SYSTEM</span>
+            <div class="scan-beam"></div>
+            <div class="btn-corners"></div>
+        </button>
+    </div>
+
+    <div id="cursor-main"></div>
+    <div id="cursor-ghost"></div>
+    
+    <div id="news-ticker" class="ticker-container">
+        <div class="ticker-label">BREAKING NEWS</div>
+        <div class="ticker-wrap">
+            <div class="ticker-move">
+                <div class="ticker-item">🕷️ SPIDER-MAN SIGHTING REPORTED NEAR PHYSICS LAB!</div>
+                <div class="ticker-item">⚡ ENERGY SURGE DETECTED IN SECTOR 7.</div>
+                <div class="ticker-item">📢 REGISTRATIONS FOR "BATTLE OF BANDS" CLOSE TONIGHT!</div>
+                <div class="ticker-item">🧪 VIVANTE 2026: THE MULTIVERSE IS UNSTABLE.</div>
+                <div class="ticker-item">⚠️ WARNING: DO NOT ENGAGE WITH VILLAIN PROTOCOLS.</div>
+            </div>
+        </div>
+        <div class="ticker-close" onclick="closeTicker()">✕</div>
+    </div>
+    
+    <canvas id="scroll-animation"></canvas>
+    
+    <div class="navbar-bg"></div>
+    <nav class="navbar">
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-left">
+            <a onclick="scrollToSection('timeline')">Timeline</a>
+            <a onclick="scrollToSection('leaderboard')">Leaderboard</a>
+            <a onclick="scrollToSection('events')">Events</a>
+        </div>
+        <div class="logo nav-logo" onclick="handleLogoClick()">
+            <img src="images/logo.png" alt="VIVANTE" />
+        </div>
+        <div class="nav-right">
+            <a onclick="scrollToSection('gallery')">Gallery</a>
+            <a onclick="scrollToSection('merch')">Merch</a>
+            <a onclick="scrollToSection('contact')">Reach Us</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <section id="home" class="hero">
+            <div class="hero-overlay"></div>
+            
+            <div class="hero-content">
+                <div class="hero-logo-wrapper">
+                    <img src="images/logo.png" alt="VIVANTE" class="big-logo" />
+                </div>
+
+                <div class="doomsday-timer-wrapper">
+                    <div class="timer-directive">IS COMING</div>
+                    <div class="timer-display">
+                        <div class="time-block">
+                            <span class="time-value" id="timer-days">00</span>
+                            <span class="time-label">DAYS</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-block">
+                            <span class="time-value" id="timer-hours">00</span>
+                            <span class="time-label">HOURS</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-block">
+                            <span class="time-value" id="timer-minutes">00</span>
+                            <span class="time-label">MINUTES</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-block">
+                            <span class="time-value" id="timer-seconds">00</span>
+                            <span class="time-label">SECONDS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="section">
+            <h2 class="section-title">Timeline of Chaos</h2>
+            <div class="timeline-container">
+                <div class="timeline-core"></div>
+                <div id="multiverse-timeline" class="multiverse-wrap" aria-hidden="true">
+                    <svg id="mv-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+                </div>
+                <div class="timeline-core"></div>
+                
+                <div class="timeline-item left">
+                    <div class="line-segment"></div>    
+                    <div class="thread-connector"></div>
+                    <div class="time-content">
+                        <span class="date">OCT 22</span>
+                        <h3>The Awakening</h3>
+                        <p>Flash Mob and Banner Release</p>
+                        <span class="time">9:00 PM</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="line-segment"></div>
+                    <div class="thread-connector"></div>
+                    <div class="time-content">
+                        <span class="date">OCT 23</span>
+                        <h3>Fun TO Behold</h3>
+                        <p>Inaugration Ceremony & Standup</p>
+                        <span class="time">05:00 PM</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="line-segment"></div>
+                    <div class="thread-connector"></div>
+                    <div class="time-content">
+                        <span class="date">OCT 24</span>
+                        <h3>Conquest Pt-1</h3>
+                        <p>Competetive Culturals-1 & Pronite-1</p>
+                        <span class="time">05:00 PM</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="line-segment"></div>
+                    <div class="thread-connector"></div>
+                    <div class="time-content">
+                        <span class="date">FEB 21</span>
+                        <h3>The Grand Finale</h3>
+                        <p>Competetive Culturals-2 & Pronite-2</p>
+                        <span class="time">08:00 PM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="section" style="position: relative; z-index: 5;">
+            <h2 class="section-title" style="color: #ff7e5f; text-shadow: 0 0 15px #ff7e5f; letter-spacing: 2px;">NEXUS EVENTS</h2>
+            <div class="tva-monitor-row">
+                <div class="tva-unit">
+                    <div class="tv-video-mask">
+                        <video autoplay loop muted playsinline>
+                            <source src="videos/culturals.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <img src="images/tva_monitor_single.png" class="tv-frame" alt="TVA Monitor">
+                    <a href="events/culturals.html" class="tv-launch-btn" target="_blank">[ ENTER ]</a>
+                    <div class="tv-label label-1">TIMELINE-616</div>
+                    <div class="tv-label label-4">CULTURALS</div>
+                </div>
+                
+                <div class="tva-unit">
+                    <div class="tv-video-mask">
+                        <video autoplay loop muted playsinline>
+                            <source src="videos/sports.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <img src="images/tva_monitor_single.png" class="tv-frame" alt="TVA Monitor">
+                    <a href="events/SPORTS.html" class="tv-launch-btn" target="_blank">[ ENTER ]</a>
+                    <div class="tv-label label-2">TIMELINE-2099</div>
+                    <div class="tv-label label-5">SPORTS</div>
+                </div>
+                
+                <div class="tva-unit">
+                    <div class="tv-video-mask">
+                        <video autoplay loop muted playsinline>
+                            <source src="videos/esports.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <img src="images/tva_monitor_single.png" class="tv-frame" alt="TVA Monitor">
+                    <a href="events/Esports.html" class="tv-launch-btn" target="_blank">[ ENTER ]</a>
+                    <div class="tv-label label-3">TIMELINE-X</div>
+                    <div class="tv-label label-6">ESPORTS</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <h2 class="section-title">Frame By Frame</h2>
+            <div style="width: 100%; max-width: 1200px;">
+                <div class="gallery-scroll">
+                    <div class="gallery-item"><img src="images/gallery (1).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (2).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (3).jpg" alt="Img" loading="lazy" /></div>
+                    
+                    <div class="gallery-item"><img src="images/gallery (5).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (6).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (7).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (8).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (9).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (10).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (11).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (12).jpg" alt="Img" loading="lazy" /></div>
+                    <div class="gallery-item"><img src="images/gallery (13).jpg" alt="Img" loading="lazy" /></div>
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;"><i class="fas fa-arrow-right"></i> Scroll to see more</p>
+            </div>
+        </section>
+
+        <section id="leaderboard" class="section waynetech-section">
+            <h2 class="section-title bat-title">WAYNETECH MAINFRAME</h2>
+            <div class="container">
+                <div class="batcomputer-terminal">
+                    <div class="sonar-scan-line"></div>
+                    <div class="tactical-screen" id="arcade-screen">
+                        <div class="security-clearance">
+                            <span>[ CLASSIFIED DATA ]</span>
+                            <span style="color: #e60000;">ENCRYPTION: LEVEL 9</span>
+                        </div>
+                        <div class="target-header">
+                            <span class="crosshair">⛝</span>
+                            <div id="arcade-game-title" class="arcade-game-title">E-SPORTS TOURNAMENT(BGMI)</div>
+                            <span class="crosshair">⛝</span>
+                        </div>
+                        <table class="bat-score-table">
+                            <thead>
+                                <tr>
+                                    <th>RANK</th>
+                                    <th>IDENTIFICATION</th>
+                                    <th>METRICS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="event-board-0" class="leaderboard-data active-board">
+                                <tr class="rank-1"><td>01</td><td>TEAM NEBULA</td><td>0</td></tr>
+                                <tr class="rank-2"><td>02</td><td>VENOM GAMING</td><td>0</td></tr>
+                                <tr class="rank-3"><td>03</td><td>QUANTUM BOYS</td><td>0</td></tr>
+                                <tr><td>04</td><td>STAR LORD Z</td><td>0</td></tr>
+                                <tr><td>05</td><td>ROCKET ROCKET</td><td>0</td></tr>
+                            </tbody>
+                            <tbody id="event-board-1" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>THE RAVAGERS</td><td>10.00</td></tr>
+                                <tr class="rank-2"><td>02</td><td>SONIC BOOM</td><td>09.50</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BASS INVADERS</td><td>08.80</td></tr>
+                                <tr><td>04</td><td>ECHO STRIKE</td><td>08.00</td></tr>
+                                <tr><td>05</td><td>VOID NOISE</td><td>07.50</td></tr>
+                            </tbody>
+                            <tbody id="event-board-2" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-3" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-4" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-5" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-6" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-7" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-8" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-9" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                            <tbody id="event-board-10" class="leaderboard-data hidden-board">
+                                <tr class="rank-1"><td>01</td><td>SYS_ADMINS</td><td>5000 EXP</td></tr>
+                                <tr class="rank-2"><td>02</td><td>NULL POINTERS</td><td>4200 EXP</td></tr>
+                                <tr class="rank-3"><td>03</td><td>BYTE ME</td><td>3800 EXP</td></tr>
+                                <tr><td>04</td><td>SYNTAX TERROR</td><td>3100 EXP</td></tr>
+                                <tr><td>05</td><td>LOGIC BOMB</td><td>2900 EXP</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tactical-controls">
+                        <button class="bat-btn" onclick="cycleLeaderboard(-1)">◀ OVERRIDE PREV</button>
+                        <div class="system-status">UPLINK SECURE</div>
+                        <button class="bat-btn" onclick="cycleLeaderboard(1)">ACCESS NEXT ▶</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="merch" class="section stark-armor-bay">
+            <h2 class="section-title">STARK ARMOR BAY</h2>
+            <div class="carousel-container" id="armor-carousel">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE T-SHIRT</h3>
+                                    <div class="armor-id">UNIT: GOD OF MISCHIEF</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/loki.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/loki back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON-240GSM</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹449</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/loki.png','images/loki back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE T-SHIRT</h3>
+                                    <div class="armor-id">UNIT: VIBRANIUM CULT</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/vibraniumcult.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/vibraniumcult back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON-240GSM</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹449</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/vibraniumcult.png','images/vibraniumcult back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE T-SHIRT</h3>
+                                    <div class="armor-id">UNIT: LEGACY OF TEN</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/legacy.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/legacy back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON-240GSM</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹449</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/legacy.png','images/legacy back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE T-SHIRT</h3>
+                                    <div class="armor-id">UNIT: CAMPUS CLASSIC</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/campus.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/campus back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON-200GSM</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹349</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/campus.png','images/campus back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE HOODIE</h3>
+                                    <div class="armor-id">UNIT: GOTHAM AFTER DARK</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/hoodie.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/hoodie back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON-320GSM</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹699</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/hoodie.png','images/hoodie back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE HOODIE</h3>
+                                    <div class="armor-id">UNIT: CAMPUS CLASSIC</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/hoodie2.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/hoodie2 back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON-320GSM</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹699</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/hoodie2.png', 'images/hoodie2 back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE TOTE</h3>
+                                    <div class="armor-id">UNIT: HOPE THEORY</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/tote2 front.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/tote2 back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹249</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/tote2 front.png','images/tote2 back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE TOTE</h3>
+                                    <div class="armor-id">UNIT: THE HEROFILES</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/tote.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/tote back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹249</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/tote.png','images/tote back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE CAPS</h3>
+                                    <div class="armor-id">UNIT: BULLSEYE</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/bullseye.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/bullseye back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹129</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/bullseye.png','images/bullseye back.png')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE CAPS</h3>
+                                    <div class="armor-id">THE FIRST AVENGER</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/captain.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/captain back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹129</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/captain.png','images/captain back.png',)">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE CAPS</h3>
+                                    <div class="armor-id">UNIT: MACH ZERO</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/machzero.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/machzero back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹129</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/machzero.png','images/machzero back.png', 'https://forms.google.com/YOUR_CAP_LINK')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="armor-tube">
+                            <div class="tube-cap top"></div>
+                            <div class="armor-content">
+                                <div class="armor-header">
+                                    <h3>VIVANTE CAPS</h3>
+                                    <div class="armor-id">UNIT: ENDGAME</div>
+                                </div>
+                                <div class="armor-display fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')">
+                                    <div class="fake-3d-tilt floating-armor">
+                                        <div class="fake-3d-flipper">
+                                            <!-- Front Image -->
+                                            <img src="images/endgame.png" alt="Merch Front" class="fake-3d-front">
+                                            <!-- Back Image (Flips on click) -->
+                                            <img src="images/endgame back.png" alt="Merch Back" class="fake-3d-back">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="armor-specs-container">
+                                    <div class="spec-row"><span class="spec-label">MATERIAL:</span><span class="spec-data">COTTON</span></div>
+                                </div>
+                                <div class="armor-footer">
+                                    <div class="price-tag">₹129</div>
+                                    <button class="equip-btn" onclick="openArmorInspect('images/endgame.png','images/endgame back.png', 'https://forms.google.com/YOUR_CAP_LINK')">
+                                        <span class="btn-icon">[</span> EQUIP <span class="btn-icon">]</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tube-cap bottom"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="nav-arrow" onclick="moveArmor(-1)">&#10094;</button>
+                    <div class="nav-dots" id="armor-dots"></div>
+                    <button class="nav-arrow" onclick="moveArmor(1)">&#10095;</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="section">
+            <h2 class="section-title">CLASSIFIED ASSETS</h2>
+            <div class="shield-grid">
+                <div class="agent-card" onclick="flipCard(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="agent-status">STATUS: ACTIVE</div>
+                            <div class="agent-photo">
+                                <img src="images/zai.jpeg" alt="Agent">
+                                <div class="photo-scan-line"></div>
+                            </div>
+                            <div class="agent-info">
+                                <h3 class="agent-name">JAI</h3>
+                                <p class="agent-role">ID: COORDINATOR </p>
+                                <div class="agent-stats">
+                                    <div class="stat-row">
+                                        <span>LEADERSHIP</span>
+                                        <div class="bar"><div class="fill" style="width: 95%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>STRESS</span>
+                                        <div class="bar"><div class="fill" style="width: 40%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="barcode-container">
+                                <div class="barcode-lines">|| █ || █ █ ||| █ || █</div>
+                                <div class="barcode-quote">"I build the path."</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="classified-stamp">TOP SECRET</div>
+                            <div class="terminal-loader">ACCESSING BIOMETRICS...<br>DECRYPTING FILE...</div>
+                            <div class="secret-data">
+                                <p class="typewriter" data-text="SUBJECT: THE ARCHITECT. Known for manipulating reality (Logistics). WEAKNESS: Coffee shortage. THREAT LEVEL: OMEGA."></p>
+                            </div>
+                            <div class="return-btn">CLICK TO CLOSE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="agent-card" onclick="flipCard(this)">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="agent-status">STATUS: ACTIVE</div>
+                            <div class="agent-photo">
+                                <img src="images/guno.jpeg" alt="Agent">
+                                <div class="photo-scan-line"></div>
+                            </div>
+                            <div class="agent-info">
+                                <h3 class="agent-name">SAGNIK B.</h3>
+                                <p class="agent-role">ID: CO-COORDINATOR</p>
+                                <div class="agent-stats">
+                                    <div class="stat-row">
+                                        <span>MGMT</span>
+                                        <div class="bar"><div class="fill" style="width: 90%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>CHAOS</span>
+                                        <div class="bar"><div class="fill" style="width: 20%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="barcode-container">
+                                <div class="barcode-lines">| █ || █ ||| █ █ || █</div>
+                                <div class="barcode-quote">"Chaos is a ladder."</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="classified-stamp">RESTRICTED</div>
+                            <div class="terminal-loader">VERIFYING CLEARANCE...<br>ACCESS GRANTED.</div>
+                            <div class="secret-data">
+                                <p class="typewriter" data-text="SUBJECT: THE MANAGER. Capability: Order from Chaos. WARNING: Do not disturb during schedule planning."></p>
+                            </div>
+                            <div class="return-btn">CLICK TO CLOSE</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 class="section-title">MISSION COORDINATES</h2>
+            <div class="war-table-container">
+                <div class="radar-sweep"></div>
+                <div class="grid-overlay"></div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5779073273347!2d79.5956613148293!3d13.747057390350722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4996d4dd7ba3%3A0x57d3825378f71777!2sIndian%20Institute%20of%20Science%20Education%20and%20Research%20Tirupati!5e0!3m2!1sen!2sin!4v1625634567890!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="target-marker">
+                    <div class="marker-label">TARGET: IISER TIRUPATI</div>
+                </div>
+                <div class="hud-corner top-left">SEC: ALPHA-1</div>
+                <div class="hud-corner top-right">STATUS: LOCKED</div>
+                <div class="hud-corner bottom-left">LAT: 13.7471° N</div>
+                <div class="hud-corner bottom-right">LNG: 79.5979° E</div>
+            </div>
+        </section>
+    </main>
+
+    <div id="clues-overlay">
+        <div class="portal-container">
+            <div class="sling-ring outer"></div>
+            <div class="sling-ring inner"></div>
+            <div class="sling-ring runes"></div>
+            <div class="mystic-content">
+                <h2 class="mystic-title">THE SANCTUM SANCTORUM</h2>
+                <p class="mystic-text">You have pierced the veil of reality. The first clue to the Vivante treasure is hidden where the timekeepers sleep.</p>
+                <button class="close-portal-btn" onclick="document.getElementById('clues-overlay').classList.remove('active')">CLOSE PORTAL</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="stone-hud">
+        <div class="hud-title">VIVANTE CORES</div>
+        <div class="stone-slots">
+            <div class="slot" id="slot-1"></div>
+            <div class="slot" id="slot-2"></div>
+            <div class="slot" id="slot-3"></div>
+            <div class="slot" id="slot-4"></div>
+            <div class="slot" id="slot-5"></div>
+            <div class="slot" id="slot-6"></div>
+        </div>
+    </div>
+
+    <div id="snap-overlay">
+        <div class="snap-message">
+            <h1>YOU SAVED THE HEROVERSE!</h1>
+            <p>Use Code: <b>HERO2026</b> for 15% off Merch!</p>
+            <button onclick="location.reload()">Restore Universe</button>
+        </div>
+    </div>
+
+    <div id="villain-overlay">
+        <div class="hack-message">SYSTEM COMPROMISED</div>
+        <div class="override-box">
+            <p>MASH <strong>[SPACEBAR]</strong> TO REBOOT</p>
+            <div class="progress-container">
+                <div id="override-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-menu-overlay">
+        <div class="mobile-close" onclick="toggleMobileMenu()">&times;</div>
+        <div class="mobile-links">
+            <a onclick="mobileScroll('home')">Home</a>
+            <a onclick="mobileScroll('timeline')">Schedule</a>
+            <a onclick="mobileScroll('events')">Events</a>
+            <a onclick="mobileScroll('gallery')">Gallery</a>
+            <a onclick="mobileScroll('leaderboard')">Leaderboard</a>
+            <a onclick="mobileScroll('merch')">Merch Store</a>
+            <a onclick="mobileScroll('team')">Core Team</a>
+            <a onclick="mobileScroll('contact')">Reach Us</a>
+        </div>
+    </div>
+    
+    <div id="lightbox-overlay" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen Memory">
+    </div>
+    
+    <div id="armor-inspect-overlay">
+        <div class="inspect-close" onclick="closeArmorInspect()">✕ EXIT INSPECT MODE</div>
+        <div class="inspect-hud top-left">
+            <p>ARMOR DIAGNOSTICS: ONLINE</p>
+            <p style="color: #fff;">FLIP AXIS: UNLOCKED</p>
+        </div>
+        <div class="inspect-hud bottom-right">[ CLICK TO ROTATE S.H.I.E.L.D. ASSET ]</div>
+        
+        <!-- UNIVERSAL LINK GOES HERE -->
+        <a id="purchase-armor-btn" href=" https://docs.google.com/forms/d/e/1FAIpQLSel43StDNUYjEdwffss51aYYZDlDwgf6sDMTfsqzi4a2Pnsow/viewform?usp=header" target="_blank">[ SECURE ASSET ]</a>
+        
+        <!-- Cleaned up dimensions and scales for perfect centering -->
+        <div id="inspect-3d-viewer" class="fake-3d-container" onclick="this.querySelector('.fake-3d-flipper').classList.toggle('flipped')" style="width: 100%; max-width: 500px; height: 60vh; margin: 0 auto; position: relative;">
+            <div class="fake-3d-tilt floating-armor" style="width: 100%; height: 100%;">
+                <div class="fake-3d-flipper">
+                    <!-- Removing inline scale ensures object-fit handles aspect ratio safely -->
+                    <img id="inspect-front-img" src="" alt="Merch Front" class="fake-3d-front" style="object-fit: contain;">
+                    <img id="inspect-back-img" src="" alt="Merch Back" class="fake-3d-back" style="transform: rotateY(180deg); object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="arc-reactor-btn" onclick="handleArcClick()">
+        <div class="arc-light-source"></div>
+        <div id="arc-rotator" class="arc-rotator">
+            <svg class="arc-grille" viewBox="0 0 100 100">
+                <defs>
+                    <filter id="grille-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.9"/>
+                    </filter>
+                </defs>
+                <polygon class="inner-glow-triangle" points="9.3,26.5 90.7,26.5 50,97" fill="rgba(255, 255, 255, 0.05)" />
+                <g stroke="#1a1a1a" stroke-linejoin="round" stroke-linecap="round" filter="url(#grille-shadow)" fill="none">
+                    <polygon points="9.3,26.5 90.7,26.5 50,97" stroke-width="5" />
+                    <polygon points="29.7,38.3 70.3,38.3 50,73.5" stroke-width="4" />
+                    <g stroke-width="3.5">
+                        <g>
+                            <line x1="50" y1="73.5" x2="50" y2="97" /> 
+                            <line x1="38" y1="26.5" x2="24" y2="5" />
+                            <line x1="62" y1="26.5" x2="76" y2="5" />
+                        </g>
+                        <g transform="rotate(120 50 50)">
+                            <line x1="50" y1="73.5" x2="50" y2="97" /> 
+                            <line x1="38" y1="26.5" x2="24" y2="5" />
+                            <line x1="62" y1="26.5" x2="76" y2="5" />
+                        </g>
+                        <g transform="rotate(240 50 50)">
+                            <line x1="50" y1="73.5" x2="50" y2="97" /> 
+                            <line x1="38" y1="26.5" x2="24" y2="5" />
+                            <line x1="62" y1="26.5" x2="76" y2="5" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <div id="arc-radial-menu">
+        <div class="radial-bg">
+            <div class="tech-line line-1"></div>
+            <div class="tech-line line-2"></div>
+            <div class="tech-line line-3"></div>
+            <div class="tech-line line-4"></div>
+        </div>
+        <a href="index.html" class="radial-link item-1"><span class="link-dot"></span> HOME BASE</a>
+        <a href="schedule.html" target="_blank" class="radial-link item-2"><span class="link-dot"></span> SCHEDULE</a>
+        <a href="shop.html" target="_blank" class="radial-link item-3"><span class="link-dot"></span> SUPPLIES</a>
+        <a href="team.html" target="_blank" class="radial-link item-4"><span class="link-dot"></span> S.H.I.E.L.D</a>
+        <a href="sponsors.html" target="_blank" class="radial-link item-5"><span class="link-dot"></span> ALLIANCES</a>
+    </div>
+    
+    <div id="card-backdrop"></div>  
+
+    <footer id="system-footer">
+        <div class="footer-ticker-wrap">
+            <div class="footer-ticker-move">
+                <span class="footer-ticker-item">// WARNING: ENERGY SURGE DETECTED IN SECTOR 7...//</span>
+                <span class="footer-ticker-item">//REGISTRATIONS FOR "BATTLE OF BANDS" CLOSING SOON...//</span>
+                <span class="footer-ticker-item">//ALL SYSTEMS NOMINAL...//</span>
+                <span class="footer-ticker-item">//WARNING: ENERGY SURGE DETECTED IN SECTOR 7...//</span>
+                <span class="footer-ticker-item">// REGISTRATIONS FOR "BATTLE OF BANDS" CLOSING SOON...//</span>
+            </div>
+        </div>
+        <div class="footer-grid">
+            <div class="footer-col lore-block">
+                <div class="lore-accent-line"></div>
+                <div class="lore-content">
+                    <div class="lore-header">/// DECRYPTED FILE ///</div>
+                    <p class="lore-text">
+                        <span class="highlight">INITIATIVE: VIVANTE '26</span><br>
+                        <span class="highlight">DIRECTIVE: INTO THE HEROVERSE</span><br>
+                        Gathering elite minds across the multiverse for a 3-day convergence of technology, culture, and power.
+                    </p>
+                    <div class="lore-footer">[ CLEARANCE: LEVEL 7 ]</div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">MISSION CONTROL</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="window.open('schedule.html', '_blank'); return false;">TIMELINE</a></li>
+                    <li><a href="#" onclick="window.open('sponsors.html', '_blank'); return false;">ALLIANCES</a></li>
+                    <li><a href="#" onclick="window.open('shop.html', '_blank'); return false;">SUPPLIES</a></li>
+                    <li><a href="#" onclick="window.open('team.html', '_blank'); return false;">S.H.I.E.L.D.</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">FREQUENCIES</h3>
+                <div class="social-holo-grid">
+                    <!-- 1. Add your Instagram link here and use target="_blank" to open in a new tab -->
+                    <a href="https://www.instagram.com/vivante_iisertirupati?obrf=ZnFzYnR0NHppYXJm" target="_blank" class="holo-icon"><i class="fab fa-instagram"></i></a>                    
+                    <!-- 2. Add mailto: before the email address so it opens the mail app -->
+                    <a href="mailto:vivante@sac.iisertirupati.ac.in" class="holo-icon"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="comm-text">vivante@sac.iisertirupati.ac.in</div>
+            </div>
+        </div>
+        
+        <div class="breathing-divider"></div>
+        <div class="system-bottom-bar">
+            <div class="dev-credits">DESIGNED & DEVELOPED BY <span class="highlight">FLASH</span></div>
+            <div class="copyright-text">© VIVANTE 2026 // ALL RIGHTS RESERVED</div>
+        </div>
+    </footer> 
+
+    <script src="script.js"></script>
+ 
+</body>
+</html>
