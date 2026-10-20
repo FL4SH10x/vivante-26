@@ -731,12 +731,57 @@ footer > *, .footer > * { position: relative; z-index: 1; }
 .mobile-close { display: none !important; }
 
 @media (max-width: 768px) {
-    /* 1. Universal Boundary: Forces every element EXCEPT the gallery to stay within screen width */
-    *:not(.gallery-scroll):not(.gallery-item) {
+    /* 1. Universal Boundary: Exclude gallery AND ticker tracks from 100% max-width constraint */
+    *:not(.gallery-scroll):not(.gallery-item):not(.ticker-wrap):not(.ticker-move):not(.ticker-item):not(.footer-ticker-wrap):not(.footer-ticker-move):not(.footer-ticker-item) {
         box-sizing: border-box !important;
         max-width: 100% !important;
     }
+    /* ==========================================
+       === TICKER MOBILE OVERLAP & SQUEEZE FIX ===
+       ========================================== */
+    .ticker-wrap, .footer-ticker-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        display: flex !important;
+        align-items: center !important;
+    }
 
+    .ticker-move, .footer-ticker-move {
+        width: max-content !important;
+        max-width: none !important;
+        display: flex !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+
+    .ticker-item, .footer-ticker-item {
+        width: auto !important;
+        max-width: none !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        font-size: 0.85rem !important;
+        padding: 0 15px !important;
+    }
+
+    .footer-ticker-wrap {
+        height: 35px !important;
+    }
+
+    .ticker-label {
+        height: 45px !important;
+        font-size: 0.95rem !important;
+        margin-top: 0 !important;
+        padding: 0 12px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+
+    .ticker-close {
+        width: 40px !important;
+        font-size: 0.9rem !important;
+        flex-shrink: 0 !important;
+    }
     /* 2. Root Safety Net */
     html, body {
         width: 100% !important;
