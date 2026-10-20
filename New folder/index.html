@@ -16,6 +16,11 @@
         </video>
         <div id="quote-terminal">
             <div class="quote-text" id="quote-display">ESTABLISHING CONNECTION...</div>
+            <!-- Added Loading Progress Bar & Percentage Text -->
+            <div id="loading-progress-container" style="display: none; width: 280px; margin: 15px auto 0; background: rgba(0, 240, 255, 0.1); border: 1px solid #00f0ff; height: 10px; border-radius: 5px; overflow: hidden; box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);">
+                <div id="loading-progress-bar" style="width: 0%; height: 100%; background: #00f0ff; transition: width 0.1s ease;"></div>
+            </div>
+            <div id="loading-percent-text" style="display: none; font-family: 'Courier New', monospace; color: #00f0ff; font-size: 0.85rem; margin-top: 8px; letter-spacing: 2px;">0%</div>
         </div>
         <div class="sys-hud top-left">SYS.VER: 20.26.0</div>
         <div class="sys-hud top-right">NEXUS STATUS: STABLE</div>

@@ -3,6 +3,18 @@
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Chakra+Petch:wght@400;700&family=Orbitron:wght@400;700;900&family=Play:wght@400;700&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&family=Teko:wght@400;600&display=swap');
 
+/* Apply border-box globally so padding doesn't add to element width */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Constrain the root document to the exact screen width and hide horizontal overflow */
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative; 
+}
 /* ==========================================================================
    === 2. CONTROL PANEL & MASTER ERA TOKEN ENGINE ===
    ========================================================================== */
@@ -719,16 +731,30 @@ footer > *, .footer > * { position: relative; z-index: 1; }
 .mobile-close { display: none !important; }
 
 @media (max-width: 768px) {
-    /* GLOBAL OVERFLOW */
-    html, body, main, section { overflow-x: hidden !important; width: 100vw !important; max-width: 100% !important; position: relative; overscroll-behavior-y: none; }
-    *, *::before, *::after { box-sizing: border-box !important; }
-    .radar-sweep, .scan-beam, .photo-scan-line, .modal-scanline { display: none !important; animation: none !important; }
+@media (max-width: 768px) {
+    
+    /* 1. Fix the Bottom-Half Touch Dead Zone (Mobile Only) */
+    .webgl-canvas, #canvas-container, .arc-reactor-container {
+        touch-action: pan-y;
+        pointer-events: none;
+    }
 
-    /* SUBPAGE & SHOP GRID OPTIMIZATION */
-    .container, .wrapper, .schedule-container, .content-area { width: 100% !important; max-width: 100vw !important; margin: 0 !important; padding: 0 15px !important; }
-    .schedule-grid, .sponsors-grid, .team-grid, .grid-container { display: flex !important; flex-direction: column !important; width: 100% !important; gap: 25px !important; }
-    .schedule-item, .details-panel, .event-card, [class*="pass"], [class*="shop"], [class*="ticket"] { width: 100% !important; max-width: 320px !important; margin: 0 auto !important; float: none !important; left: auto !important; right: auto !important; }
+    /* 2. Enable Native Gallery Horizontal Scroll (Mobile Only) */
+    .gallery-container {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; 
+        overscroll-behavior-x: contain; 
+    }
 
+    /* Optional: Hide the scrollbar for a cleaner look on mobile */
+    .gallery-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+}
     /* HERO & CLOCK */
     .hero { background-size: cover !important; background-position: top center !important; background-repeat: no-repeat !important; background-color: #050505 !important; }
     .hero-logo-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; }
@@ -881,3 +907,65 @@ footer > *, .footer > * { position: relative; z-index: 1; }
 }
 
 .fake-3d-back { transform: rotateY(180deg); }
+#loading-progress-container {
+    display: none;
+    width: 280px;
+    margin: 15px auto 0;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid #00f0ff;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+#loading-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #00f0ff;
+    transition: width 0.1s ease-out;
+}
+
+#loading-percent-text {
+    display: none;
+    font-family: 'Courier New', monospace;
+    color: #00f0ff;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
+/* Allow vertical scrolling naturally even when touching 3D canvases or interactive elements */
+html, body {
+    touch-action: pan-y;
+    overflow-x: hidden;
+}
+@media (max-width: 768px) {
+    /* 1. Universal Boundary: Forces every element to stay within the screen width */
+    *, *::before, *::after {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    /* 2. Root Safety Net: Locks the viewport and hides stray horizontal overflow */
+    html, body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+        position: relative;
+    }
+
+    /* 3. Global Padding: Keeps content from touching the absolute edges of the phone screen */
+    section, .container, .wrapper {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* 4. Force specific known multi-column layouts (like Team and Shop) to stack vertically */
+    .roster-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .ticket-card {
+        width: 100% !important;
+        height: auto !important;
+    }
+}

@@ -170,49 +170,118 @@ document.addEventListener("DOMContentLoaded", () => {
             DoomsdayAudio.unlock();
             startBtn.style.display = 'none'; // Hide the button
 
-            // 1. Grab the quote terminal to use as a loading screen
+            // 1. Grab terminal and progress elements & force them visible
             const terminal = document.getElementById('quote-display');
+            const progressBar = document.getElementById('loading-progress-bar');
+            const progressText = document.getElementById('loading-percent-text');
+            const progressContainer = document.getElementById('loading-progress-container');
+
             if (terminal) {
                 terminal.style.display = 'block';
+                terminal.innerText = "DECRYPTING MULTIVERSE ASSETS...";
                 terminal.classList.add('visible', 'glitching');
             }
-
-            // 2. Start a slick hacker-style progress counter
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += Math.floor(Math.random() * 15) + 5; 
-                if (progress > 99) progress = 99; // Hold at 99% until video actually loads
-                if (terminal) terminal.innerText = `DECRYPTING MULTIVERSE FEED... ${progress}%`;
-            }, 150);
-
-            // 3. Define the function that finally plays the video
-            const startVideo = () => {
-                clearInterval(progressInterval);
-                if (terminal) {
-                    terminal.innerText = "CONNECTION ESTABLISHED.";
-                    setTimeout(() => terminal.style.display = 'none', 1000);
-                }
-                video.muted = false;
-                video.play().catch(err => {
-                    console.warn("Playback blocked or missing. Bypassing:", err);
-                    finishIntro();
-                });
-            };
-
-            // 4. Check if the video is already buffered. If not, wait for it.
-            if (video.readyState >= 3) { // 3 = HAVE_FUTURE_DATA
-                setTimeout(startVideo, 800); // Show off the loading animation briefly
-            } else {
-                video.load(); // Force the browser to start downloading the video
-                
-                // Wait for the browser to shout "I have enough data to play smoothly!"
-                video.addEventListener('canplay', startVideo, { once: true });
-                
-                // Safety fallback: if it takes longer than 8 seconds, force play anyway
-                setTimeout(() => {
-                    if (video.paused) startVideo();
-                }, 8000);
+            if (progressBar) {
+                progressBar.style.display = 'block';
+                progressBar.style.width = '0%';
             }
+            if (progressText) {
+                progressText.style.display = 'block';
+                progressText.innerText = '0%';
+            }
+            if (progressContainer) {
+                progressContainer.style.display = 'block';
+            }
+
+            // 2. Track real assets in the background
+            const images = Array.from(document.querySelectorAll('img'));
+            const videos = Array.from(document.querySelectorAll('video'));
+            const totalAssets = images.length + videos.length;
+            
+            let loadedCount = 0;
+            const assetLoaded = () => { loadedCount++; };
+
+            if (totalAssets > 0) {
+                images.forEach(img => {
+                    if (img.complete) loadedCount++;
+                    else {
+                        img.addEventListener('load', assetLoaded, { once: true });
+                        img.addEventListener('error', assetLoaded, { once: true });
+                    }
+                });
+                videos.forEach(vid => {
+                    vid.load();
+                    if (vid.readyState >= 3) loadedCount++;
+                    else {
+                        vid.addEventListener('canplaythrough', assetLoaded, { once: true });
+                        vid.onerror = assetLoaded;
+                    }
+                });
+            } else {
+                loadedCount = 1;
+            }
+
+            // 3. Smooth visual progress loop that climbs from 0 to 100% naturally
+            let displayPercent = 0;
+            const startTime = Date.now();
+            const minLoadTime = 2000; // Guaranteed minimum 2 seconds so you can enjoy the animation
+
+            const loadInterval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                
+                // Calculate percentage based on time (smooth 0-100 flow) and real assets
+                let timeProgress = (elapsed / minLoadTime) * 100;
+                let assetProgress = totalAssets > 0 ? (loadedCount / totalAssets) * 100 : 100;
+                
+                // Take the lower of the two so it waits if assets are heavy, but climbs smoothly
+                let target = Math.min(timeProgress, assetProgress);
+
+                if (displayPercent < target) {
+                    displayPercent += 2; // Climb speed
+                }
+
+                // Force completion when time is up and assets are ready
+                if (elapsed >= minLoadTime && loadedCount >= totalAssets && displayPercent >= 98) {
+                    displayPercent = 100;
+                }
+
+                if (displayPercent > 100) displayPercent = 100;
+
+                // Update the actual width of the bar and text on screen
+                if (progressBar) progressBar.style.width = displayPercent + '%';
+                if (progressText) progressText.innerText = displayPercent + '%';
+
+                // When it hits 100%, lock it and trigger the professional pause
+                if (displayPercent >= 100) {
+                    clearInterval(loadInterval);
+                    triggerProfessionalPause();
+                }
+            }, 30);
+
+            // Safety fallback
+            setTimeout(() => {
+                clearInterval(loadInterval);
+                if (progressBar) progressBar.style.width = '100%';
+                if (progressText) progressText.innerText = '100%';
+                triggerProfessionalPause();
+            }, 6000);
+
+            // 4. Professional Pause Gap at 100%
+            const triggerProfessionalPause = () => {
+                if (terminal) terminal.innerText = "ACCESS GRANTED. STANDBY...";
+                
+                setTimeout(() => {
+                    if (progressContainer) progressContainer.style.display = 'none';
+                    if (progressText) progressText.style.display = 'none';
+                    if (terminal) terminal.style.display = 'none';
+
+                    video.muted = false;
+                    video.play().catch(err => {
+                        console.warn("Playback blocked or missing. Bypassing:", err);
+                        finishIntro();
+                    });
+                }, 800); // 0.8 second gap
+            };
         });
         introOverlay.addEventListener('dblclick', finishIntro);
     }
