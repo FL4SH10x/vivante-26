@@ -379,8 +379,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const slot = document.getElementById(`slot-${idx+1}`);
             if (slot) { slot.classList.add('filled'); slot.style.setProperty('--stone-color', color); }
             if (++collectedCount === stoneColors.length) setTimeout(() => {
-                snapOverlay.style.display = 'flex'; document.body.style.overflow = 'hidden';
+            snapOverlay.style.display = 'flex'; document.body.style.overflow = 'hidden';
                 if (isVillainMode) victoryRestore(true);
+
+                // Show the discount code
+                alert("Universe saved! Time to Get some SUPPLIES.");
+
+                // Automatically redirect to the shop page
+                window.location.href = "shop.html"; 
             }, 800);
         }
 
@@ -902,3 +908,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+window.returnToNexus = function(event) {
+    // Prevent the default jump-to-top behavior from href="#"
+    if (event) event.preventDefault(); 
+    
+    const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
+    
+    if (isMobile) {
+        // Strictly for mobile: Redirect to the main initial page
+        window.location.href = 'index.html'; 
+    } else {
+        // For PC: Close the tab normally
+        window.close();
+        
+        // Safety fallback for PC: If the browser blocks the close, redirect anyway
+        setTimeout(() => { window.location.href = 'index.html'; }, 300);
+    }
+};

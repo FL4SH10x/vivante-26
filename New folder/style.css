@@ -731,30 +731,71 @@ footer > *, .footer > * { position: relative; z-index: 1; }
 .mobile-close { display: none !important; }
 
 @media (max-width: 768px) {
-@media (max-width: 768px) {
+    /* 1. Universal Boundary: Forces every element EXCEPT the gallery to stay within screen width */
+    *:not(.gallery-scroll):not(.gallery-item) {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    /* 2. Root Safety Net */
+    html, body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+        position: relative;
+    }
+
+    section, .container, .wrapper {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .roster-grid {
+        grid-template-columns: 1fr !important;
+    }
     
-    /* 1. Fix the Bottom-Half Touch Dead Zone (Mobile Only) */
+    .ticket-card {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* 3. Fix the Bottom-Half Touch Dead Zone */
     .webgl-canvas, #canvas-container, .arc-reactor-container {
-        touch-action: pan-y;
-        pointer-events: none;
+        touch-action: pan-y !important;
+        pointer-events: none !important;
     }
 
-    /* 2. Enable Native Gallery Horizontal Scroll (Mobile Only) */
-    .gallery-container {
-        display: flex;
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch; 
-        overscroll-behavior-x: contain; 
+    /* 4. FIX: Properly unlock and reset the gallery track for mobile scrolling */
+    .gallery-scroll {
+        display: flex !important;
+        width: 100vw !important;
+        max-width: none !important; /* Crucial: Overrides global constraints */
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important; 
+        overscroll-behavior-x: contain !important;
+        touch-action: pan-x pan-y !important; /* Allows native scrolling in both directions */
+        
+        /* Resets the desktop centering offsets that break mobile flex tracks */
+        left: 0 !important;
+        right: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 20px !important;
     }
 
-    /* Optional: Hide the scrollbar for a cleaner look on mobile */
-    .gallery-container::-webkit-scrollbar {
-        display: none;
+    .gallery-scroll::-webkit-scrollbar {
+        display: none !important;
     }
-    
 }
+/* Allow swiping directly over the photos and prevent native image drag */
+    .gallery-item, 
+    .gallery-item img {
+        touch-action: pan-x pan-y !important;
+        -webkit-user-drag: none !important;
+        -webkit-touch-callout: none !important;
+        user-select: none !important;
+    }
+
     /* HERO & CLOCK */
     .hero { background-size: cover !important; background-position: top center !important; background-repeat: no-repeat !important; background-color: #050505 !important; }
     .hero-logo-wrapper { width: 100% !important; display: flex !important; justify-content: center !important; }
@@ -862,7 +903,8 @@ footer > *, .footer > * { position: relative; z-index: 1; }
     .inspect-close { top: 20px !important; right: 20px !important; font-size: 1.2rem !important; }
     #purchase-armor-btn { bottom: 25px !important; padding: 12px 25px !important; font-size: 1.2rem !important; width: 80% !important; max-width: 300px !important; }
     #inspect-3d-viewer { height: 50vh !important; } 
-} /* <--- CRITICAL: THIS CLOSES THE @media (max-width: 768px) QUERY */
+}
+ /* <--- CRITICAL: THIS CLOSES THE @media (max-width: 768px) QUERY */
 
 /* ==========================================================================
    === FAKE 3D MERCH HOVER & FLIP LOGIC (MUST BE OUTSIDE MEDIA QUERY) ===
@@ -938,34 +980,4 @@ footer > *, .footer > * { position: relative; z-index: 1; }
 html, body {
     touch-action: pan-y;
     overflow-x: hidden;
-}
-@media (max-width: 768px) {
-    /* 1. Universal Boundary: Forces every element to stay within the screen width */
-    *, *::before, *::after {
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-    }
-
-    /* 2. Root Safety Net: Locks the viewport and hides stray horizontal overflow */
-    html, body {
-        width: 100% !important;
-        overflow-x: hidden !important;
-        position: relative;
-    }
-
-    /* 3. Global Padding: Keeps content from touching the absolute edges of the phone screen */
-    section, .container, .wrapper {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-
-    /* 4. Force specific known multi-column layouts (like Team and Shop) to stack vertically */
-    .roster-grid {
-        grid-template-columns: 1fr !important;
-    }
-    
-    .ticket-card {
-        width: 100% !important;
-        height: auto !important;
-    }
 }
