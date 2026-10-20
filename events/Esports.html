@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESPORTS | VIVANTE 2026</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body class="tva-archive-body">
+
+    <div class="bg-grid-lines"></div>
+
+    <div id="cursor-main"></div>
+    <div id="cursor-ghost"></div>
+
+    <header class="archive-header">
+        <a href="#" onclick="returnToNexus(event)" class="back-btn">
+            [ BACK TO NEXUS ]
+        </a>
+
+        <script>
+            function returnToNexus(e) {
+                e.preventDefault();
+                
+                // 1. Try to close the current tab (Works because target="_blank" opened it)
+                window.close();
+                
+                // 2. Fallback: If the user opened the link directly and the browser blocks window.close(),
+                // this safely routes them back to the main index page instead.
+                setTimeout(() => {
+                    window.location.href = '../index.html#events'; 
+                }, 200);
+            }
+        </script>
+        <div class="file-id" style="text-align: right;">
+            <h1>TIMELINE-X: ESPORTS</h1>
+            <p>/// STATUS: PVP ENGAGED ///</p>
+        </div>
+    </header>
+
+    <main class="archive-grid">
+
+        <div class="data-card">
+            <div class="card-visual">
+                <img src="../images/ff.jpg" alt="Valorant">
+                <div class="photo-scan-line"></div>
+            </div>
+            <div class="card-intel">
+                <h3>FREE FIRE</h3>
+                <div class="meta-row">
+                    <span><i class="fas fa-calendar-alt"></i> FEB 19, 6:00 PM</span>
+                    <span class="threat-badge lvl-omega">THREAT: OMEGA</span>
+                </div>
+                <p class="desc">
+                    5v5 Tactical Shooter. Lock in your agents and defend the spike sites. High coordination required to prevent absolute timeline collapse.
+                </p>
+                <a href="#" class="register-btn" 
+                data-title="FREE FIRE" 
+                data-team="SQUAD (4 + 1 SUB)" 
+                data-fee="₹TBD" 
+                data-link="https://forms.gle/DjpMXfdGrVkPo4Pr8" 
+                data-rules="Standard Multiverse protocols apply.|No temporal manipulation or reality warping.|Judges' decisions are absolute across all timelines.">
+                INITIATE PROTOCOL
+                </a>
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="card-visual">
+                <img src="../images/bgmi.jpg" alt="BGMI">
+                <div class="photo-scan-line"></div>
+            </div>
+            <div class="card-intel">
+                <h3>BATTLEGROUND NEXUS (BGMI)</h3>
+                <div class="meta-row">
+                    <span><i class="fas fa-calendar-alt"></i> FEB 20, 8:00 PM</span>
+                    <span class="threat-badge lvl-high">THREAT: HIGH</span>
+                </div>
+                <p class="desc">
+                    Drop into the danger zone. Survive the shrinking reality borders. Outlast 99 other variants to claim the ultimate chicken dinner.
+                </p>
+                <a href="#" class="register-btn" 
+                data-title="BGMI" 
+                data-team="SQUAD (4 + 1 SUB)" 
+                data-fee="₹TBD" 
+                data-link="https://forms.gle/Km51X2Zhtzubxhxr9" 
+                data-rules="Standard Multiverse protocols apply.|No temporal manipulation or reality warping.|Judges' decisions are absolute across all timelines.">
+                INITIATE PROTOCOL
+                </a>
+            </div>
+        </div>
+
+        <div class="data-card">
+            <div class="card-visual">
+                <img src="../images/codm.jpg" alt="EA FC">
+                <div class="photo-scan-line"></div>
+            </div>
+            <div class="card-intel">
+                <h3>COD-M</h3>
+                <div class="meta-row">
+                    <span><i class="fas fa-calendar-alt"></i> FEB 21, 2:00 PM</span>
+                    <span class="threat-badge lvl-med">THREAT: MED</span>
+                </div>
+                <p class="desc">
+                   5v5 Tactical Shooter. Lock in your agents and defend the spike sites. High coordination required to prevent absolute timeline collapse. 
+                </p>
+                <a href="#" class="register-btn" 
+                data-title="COD-M" 
+                data-team="SQUAD (5 + 1 SUB)" 
+                data-fee="₹TBD" 
+                data-link="https://forms.gle/B4Kn98s6oPmCdkTY6" 
+                data-rules="Standard Multiverse protocols apply.|No temporal manipulation or reality warping.|Judges' decisions are absolute across all timelines.">
+                INITIATE PROTOCOL
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    </main>
+    <div id="holo-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-scanline"></div>
+            
+            <div class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            
+            <div class="modal-header">
+                <h2 id="modal-title">EVENT PROTOCOL</h2>
+                <p class="modal-status">/// CLEARANCE GRANTED ///</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-info-row">
+                    <span class="info-label">SQUAD SIZE:</span>
+                    <span id="modal-team" class="info-val">...</span>
+                </div>
+                <div class="modal-info-row">
+                    <span class="info-label">CREDITS REQ:</span>
+                    <span id="modal-fee" class="info-val">...</span>
+                </div>
+                
+                <div class="modal-rules">
+                    <strong>ROEs (Rules of Engagement):</strong>
+                    <ul>
+                        <li>Standard Multiverse protocols apply.</li>
+                        <li>No temporal manipulation or reality warping.</li>
+                        <li>Judges' decisions are absolute across all timelines.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <a href="#" id="modal-link" class="confirm-btn" target="_blank">
+                [ CONFIRM SQUAD ]
+            </a>
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
