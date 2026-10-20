@@ -193,78 +193,57 @@ document.addEventListener("DOMContentLoaded", () => {
                 progressContainer.style.display = 'block';
             }
 
-            // 2. Track real assets in the background
-            const images = Array.from(document.querySelectorAll('img'));
-            const videos = Array.from(document.querySelectorAll('video'));
-            const totalAssets = images.length + videos.length;
-            
-            let loadedCount = 0;
-            const assetLoaded = () => { loadedCount++; };
+            // 2. Strict Real-Time Video Buffer Tracking
+            const introVideo = document.getElementById('intro-video');
+            let isReady = false;
 
-            if (totalAssets > 0) {
-                images.forEach(img => {
-                    if (img.complete) loadedCount++;
-                    else {
-                        img.addEventListener('load', assetLoaded, { once: true });
-                        img.addEventListener('error', assetLoaded, { once: true });
-                    }
-                });
-                videos.forEach(vid => {
-                    vid.load();
-                    if (vid.readyState >= 3) loadedCount++;
-                    else {
-                        vid.addEventListener('canplaythrough', assetLoaded, { once: true });
-                        vid.onerror = assetLoaded;
-                    }
-                });
-            } else {
-                loadedCount = 1;
+            const updateProgress = (percent) => {
+                if (progressBar) progressBar.style.width = percent + '%';
+                if (progressText) progressText.innerText = Math.floor(percent) + '%';
+            };
+
+            if (!introVideo) {
+                updateProgress(100);
+                triggerProfessionalPause();
+                return;
             }
 
-            // 3. Smooth visual progress loop that climbs from 0 to 100% naturally
-            let displayPercent = 0;
-            const startTime = Date.now();
-            const minLoadTime = 2000; // Guaranteed minimum 2 seconds so you can enjoy the animation
+            // Force the browser to aggressively load the video now that the user has clicked
+            introVideo.load();
 
-            const loadInterval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
+            // Track the actual bytes being downloaded into the browser's buffer
+            introVideo.addEventListener('progress', () => {
+                if (isReady) return;
+                if (introVideo.duration > 0 && introVideo.buffered.length > 0) {
+                    // Get the furthest loaded chunk of the video
+                    const bufferedEnd = introVideo.buffered.end(introVideo.buffered.length - 1);
+                    const duration = introVideo.duration;
+                    let percent = (bufferedEnd / duration) * 100;
+                    
+                    // Cap at 99% visually until the browser officially fires 'canplaythrough'
+                    if (percent >= 100) percent = 99; 
+                    updateProgress(percent);
+                }
+            });
+
+            // 3. The absolute truth: 'canplaythrough' means the browser guarantees no stuttering
+            const videoReady = () => {
+                if (isReady) return;
+                isReady = true;
+                updateProgress(100);
                 
-                // Calculate percentage based on time (smooth 0-100 flow) and real assets
-                let timeProgress = (elapsed / minLoadTime) * 100;
-                let assetProgress = totalAssets > 0 ? (loadedCount / totalAssets) * 100 : 100;
-                
-                // Take the lower of the two so it waits if assets are heavy, but climbs smoothly
-                let target = Math.min(timeProgress, assetProgress);
+                // Brief 300ms delay just to let the CSS width transition cleanly hit 100% visually
+                setTimeout(triggerProfessionalPause, 300);
+            };
 
-                if (displayPercent < target) {
-                    displayPercent += 2; // Climb speed
-                }
-
-                // Force completion when time is up and assets are ready
-                if (elapsed >= minLoadTime && loadedCount >= totalAssets && displayPercent >= 98) {
-                    displayPercent = 100;
-                }
-
-                if (displayPercent > 100) displayPercent = 100;
-
-                // Update the actual width of the bar and text on screen
-                if (progressBar) progressBar.style.width = displayPercent + '%';
-                if (progressText) progressText.innerText = displayPercent + '%';
-
-                // When it hits 100%, lock it and trigger the professional pause
-                if (displayPercent >= 100) {
-                    clearInterval(loadInterval);
-                    triggerProfessionalPause();
-                }
-            }, 30);
-
-            // Safety fallback
-            setTimeout(() => {
-                clearInterval(loadInterval);
-                if (progressBar) progressBar.style.width = '100%';
-                if (progressText) progressText.innerText = '100%';
-                triggerProfessionalPause();
-            }, 6000);
+            // Check if it's already fully cached and ready, otherwise wait for the event
+            if (introVideo.readyState >= 4) { // HAVE_ENOUGH_DATA
+                videoReady();
+            } else {
+                introVideo.addEventListener('canplaythrough', videoReady, { once: true });
+                // Only bypass if the network actively fails/blocks the video
+                introVideo.addEventListener('error', videoReady, { once: true });
+            }
 
             // 4. Professional Pause Gap at 100%
             const triggerProfessionalPause = () => {

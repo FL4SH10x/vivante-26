@@ -786,7 +786,6 @@ footer > *, .footer > * { position: relative; z-index: 1; }
     .gallery-scroll::-webkit-scrollbar {
         display: none !important;
     }
-}
 /* Allow swiping directly over the photos and prevent native image drag */
     .gallery-item, 
     .gallery-item img {
